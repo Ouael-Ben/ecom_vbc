@@ -1,8 +1,12 @@
-import React from 'react'
-import Box from '@material-ui/core/Box';
+import React, {useState, useEffect} from 'react'
+import {useDispatch,useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Container } from '@material-ui/core';
+import { Paper, Container, Grid } from '@material-ui/core';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import Logo from '../../components/Logo/Logo';
+import { loginUser } from './ressources/actions';
+import AuthUtils from '../../utils/auth/isAuth';
 
 
 const useStyles = makeStyles(theme => ({
@@ -11,20 +15,60 @@ const useStyles = makeStyles(theme => ({
     },
     paper : {
         margin: theme.spacing(1),
-    }
+        padding: theme.spacing(3),
+        textAlign: 'center',
+        width: 600
+    },
+    error: {
+        color: 'red'
+      }
   }));
 export default function LoginPage() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [input, setInput] = useState({})
+    const {error, isLoading} = useSelector(state =>state.Login);
+
+    useEffect(() => {
+        if(AuthUtils.isAuth())
+          history.push('/');
+      })
+    const handleInputChange = (e) => setInput({
+        ...input,
+        [e.currentTarget.name]: e.currentTarget.value
+      })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const user  = {
+            login : input.login,
+            password : input.password,
+            history
+        }
+        dispatch(loginUser(user));
+    }
     return (
-        <Box m={1} className={classes.root}>
-            <Container>
-                <Paper elevation={3} >
-                    <Paper elevation={0} className={classes.paper}>
-                        Logo
-                        <LoginForm />
-                    </Paper>
+        <Grid className={classes.root}
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}>
+
+            <Grid item >
+                <Paper elevation={3} className={classes.paper}>
+                    <Logo />
+                    <LoginForm isLoading = {isLoading} 
+                               OnInputChange = {handleInputChange}
+                               OnSubmit = {handleSubmit}
+                               error = {error}
+                    />
+
                 </Paper>
-            </Container> 
-        </Box> 
+            </Grid>   
+
+        </Grid> 
+        
     )
 }
