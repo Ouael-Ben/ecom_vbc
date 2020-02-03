@@ -1,6 +1,6 @@
 import React from 'react'
-import {BrowserRouter as Router,Switch, Route} from 'react-router-dom';
-import {Provider} from 'react-redux';
+import {BrowserRouter as Router,Switch, Route, useHistory} from 'react-router-dom';
+import {Provider, useDispatch} from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Login  from '../Login';
 import Register from '../Register';
@@ -9,12 +9,13 @@ import ListProduct from '../Product/ListProduct/ListProduct';
 import ProductRoute from '../Product/routes';
 import Header from '../../components/Header/Header';
 
-export default function index() {
+export default function Layout() {
+    
     return (
         <Router>
              <Provider store={store}>
                 <CssBaseline />
-                <Header />
+                <Route component={Header} />
                 <Switch>
                     <Route path="/" exact component= {ListProduct} />
                     <Route path= '/login' exact component={Login} />

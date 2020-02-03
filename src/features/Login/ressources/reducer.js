@@ -1,4 +1,4 @@
-import {LOGIN_USER,LOGIN_SUCCEFULL, LOGIN_FAILED, SET_USER_IN_STORE} from './action-type';
+import {LOGIN_USER,LOGIN_SUCCEFULL, LOGIN_FAILED, SET_USER_IN_STORE, LOGOUT_USER, LOGOUT_USER_SUCCESFULL, LOGOUT_USER_FAILED} from './action-type';
 import AccessTokenStorage from '../../../utils/auth/AccessTokenStorage';
 import decode from 'jwt-decode';
 import _ from 'lodash';
@@ -17,6 +17,12 @@ export default (state = initialState, action) => {
             return {...state,isLoading: false, authenticated:true}
         case LOGIN_FAILED:
             return {...state, isLoading: false, error: action.payload}
+        case LOGOUT_USER: 
+            return {...state, isLoading: true}
+        case LOGOUT_USER_SUCCESFULL:
+            return {...state, isLoading: false, authenticated: false}
+        case LOGOUT_USER_FAILED: 
+            return {...state,isLoading: false, error: action.payload}
         case SET_USER_IN_STORE: 
             if(_.isEmpty(_.get(state,'user'))){
                 const token =  AccessTokenStorage.get();

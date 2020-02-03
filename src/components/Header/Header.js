@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MyMenu from '../Menu/MyMenu';
 import {useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) =>
 export default function Header() {
 
     const classes = useStyles();
+    const history = useHistory();
     const {authenticated} = useSelector(state => state.Login);
     return (
         <Fragment>
@@ -32,7 +34,7 @@ export default function Header() {
                                 <Typography variant="h6" className={classes.title}>
                                     E-User
                                 </Typography>
-                                <MyMenu />
+                                <MyMenu history={history} />
                                 </Toolbar>
                             </AppBar>
             }

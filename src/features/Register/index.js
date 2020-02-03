@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Container, Grid } from '@material-ui/core';
 import Logo from '../../components/Logo/Logo';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import { registerUser } from './ressources/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import AuthUtils from '../../utils/auth/isAuth';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,6 +22,31 @@ const useStyles = makeStyles(theme => ({
   }));
 export default function RegisterPage() {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [input, setInput] = useState({})
+    const {error, isLoading} = useSelector(state =>state.Register);
+
+    useEffect(() => {
+        if(AuthUtils.isAuth())
+          history.push('/');
+      })
+    const handleInputChange = (e) => setInput({
+        ...input,
+        [e.currentTarget.name]: e.currentTarget.value
+      })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const user  = {
+            login : input.login,
+            password : input.password,
+            fullName: input.fullName,
+            confirmPassword: input.confirmPassword,
+            history
+        }
+        dispatch(registerUser(user));
+    }
     return (
         <Grid className={classes.root}
             container
@@ -29,7 +59,11 @@ export default function RegisterPage() {
             <Grid item >
                 <Paper elevation={3} className={classes.paper}>
                     <Logo />
-                    <RegisterForm />
+                    <RegisterForm 
+                               isLoading = {isLoading} 
+                               OnInputChange = {handleInputChange}
+                               OnSubmit = {handleSubmit}
+                               error = {error}/>
                 </Paper>
             </Grid>   
 

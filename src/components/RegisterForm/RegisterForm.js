@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
-import { TextField} from '@material-ui/core'
+import { TextField, Typography} from '@material-ui/core'
 import MyButton from '../commun/Button';
 
-export default function RegisterForm() {
+export default function RegisterForm({error, isLoading, OnInputChange, OnSubmit }) {
     return (
         <Fragment>
             <form>
@@ -19,6 +19,7 @@ export default function RegisterForm() {
                             }}
                             fullWidth
                             margin="normal"
+                            onChange={(e) => OnInputChange(e)}
                 />
                 <TextField id="login" 
                         name="login" 
@@ -33,6 +34,7 @@ export default function RegisterForm() {
                           }}
                         fullWidth
                         margin="normal"
+                        onChange={(e) => OnInputChange(e)}
                 />
                 
                 <TextField id="password" 
@@ -48,6 +50,7 @@ export default function RegisterForm() {
                                 fontSize: 11
                             }
                           }}
+                        onChange={(e) => OnInputChange(e)}
                 />
                  <TextField id="confirmPassword" 
                         name="confirmPassword" 
@@ -62,8 +65,10 @@ export default function RegisterForm() {
                                 fontSize: 11
                             }
                           }}
+                        onChange={(e) => OnInputChange(e)}
                 />
-                <MyButton nameButton="Register" isLoading ={true} />
+                <Typography variant="subtitle2" style={{color: 'red'}}>{error}</Typography>
+                <MyButton nameButton="Register" isLoading={isLoading} onClick = {OnSubmit} />
                
             </form>
         </Fragment>

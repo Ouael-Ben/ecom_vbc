@@ -1,9 +1,11 @@
 import React,{Fragment} from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles, IconButton, Badge } from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../features/Login/ressources/actions';
 const useStyles = makeStyles((theme) =>
   createStyles({
     menuButton: {
@@ -18,9 +20,14 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-function MyMenu() {
+function MyMenu({history}) {
     const classes = useStyles();
-
+    const dispatch = useDispatch();
+    const handleLogout = (history) =>  {
+        console.log(history);
+        dispatch(logoutUser(history));
+    }
+    
     return (
         <div>
              <Link to='/products' className={classes.link}>
@@ -38,7 +45,7 @@ function MyMenu() {
                     <ShoppingCart />
                 </Badge>
             </IconButton>
-            <IconButton color="inherit" >
+            <IconButton color="inherit" onClick={() => handleLogout(history)}>
                 <PowerSettingsNew />
             </IconButton>
         </div>
