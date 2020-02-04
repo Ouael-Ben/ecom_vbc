@@ -14,13 +14,13 @@ function ListProduct() {
     const handleClick = (offset) => {
         setOffset(offset);
     }
-    
     useEffect(() => {
-        //dispatch(getAllProducts());
-    })
+        dispatch(getAllProducts());
+    },[]);
     return (
         <Container >
-             {isLoading ? <Loading isLoading = {true} size ={30} color="blue"/> : <Grid container spacing={3}>
+             {isLoading ? 
+                         <Loading isLoading = {true} size ={30} color="blue"/> : <Grid container spacing={3}>
                     {/* <Grid item xs={3}>
                         <Card />
                     </Grid>
