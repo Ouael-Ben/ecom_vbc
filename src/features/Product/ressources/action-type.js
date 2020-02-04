@@ -1,0 +1,2 @@
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const PUT_ALL_PRODUCTS = "PUT_ALL_PRODUCTS";

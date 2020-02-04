@@ -1,7 +1,7 @@
 import {call , put, takeLatest} from 'redux-saga/effects';
 import { authenticateUser, logoutUserService } from '../../../services/auth/Auth';
 import { LOGIN_USER, LOGOUT_USER} from './action-type';
-import { loginUserSuccefull, loginUserFailed, logoutUserFailed } from './actions';
+import { loginUserSuccefull, loginUserFailed, logoutUserFailed, logoutUserSuccesFull } from './actions';
 import {isNetworkError} from '../../../utils/catchNetworkError';
 import AccesTokenStorage from '../../../utils/auth/AccessTokenStorage';
 import { forwardTo } from '../../../utils/history';
@@ -36,12 +36,12 @@ function * logoutUserSaga(values){
         console.log(values);
         const {history} = values.payload;
         yield call(logoutUserService);
-        yield AccesTokenStorage.clear();
-        yield call(loginUserSuccefull);
+        AccesTokenStorage.clear();
+        yield put(logoutUserSuccesFull());
         yield call(forwardTo,history,'/login'); 
 
     }catch(e){
-        console.log("inside logouuuuuuuuuuuuuuuuuut",e);
+        console.log('leeeeeeee',e);
         // if(isNetworkError(e)){
         //     alert("Network error")
         //     yield put(logoutUserFailed("Error internal"));

@@ -29,10 +29,10 @@ export default function Header() {
     return (
         <Fragment>
             {
-                    authenticated && <AppBar position="static">
+                    authenticated && <AppBar position="static" style={{marginBottom:10}}>
                                 <Toolbar>
                                 <Typography variant="h6" className={classes.title}>
-                                    E-User
+                                    E-Commerce
                                 </Typography>
                                 <MyMenu history={history} />
                                 </Toolbar>
