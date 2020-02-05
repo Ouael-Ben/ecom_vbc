@@ -11,7 +11,8 @@ export const getAllProductsService = async (page) => {
         })
         .then(res => {
           return { data: [...res.data.data],
-                    total: res.data.total}} )
+                    total: res.data.total,
+                    last_page: res.data.last_page}} )
         .catch(err => {throw err});
 
 }

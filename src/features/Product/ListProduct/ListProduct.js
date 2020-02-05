@@ -9,19 +9,16 @@ import { getAllProducts } from '../ressources/actions';
 import ReactPaginate from 'react-paginate';
 
 function ListProduct() {
-    const [offset, setOffset] = useState(0);
+    const [offset, setOffset] = useState(1);
     
     const dispatch = useDispatch();
     const {isLoading, products,totalRows} = useSelector(state => state.Product);
-    
-    const handlePageClick = data => {
-        console.log(data);
-        return;
-        let selected = data.selected;
-        const page = Math.ceil(selected * 10);
-        setOffset(page);
+    const handleClick = (offset) => {
+        
+        const page = offset / 10;
         dispatch(getAllProducts(page))
-      };
+        setOffset(offset-10);
+    }
     useEffect(() => {
         dispatch(getAllProducts());
     },[]);
@@ -40,25 +37,12 @@ function ListProduct() {
                     
                     }
                     <Grid item xs={12}>
-                        {/* <Pagination
+                        <Pagination
                             limit={10}
                             offset={offset}
                             total={totalRows}
-                            onClick={(e, offset) => handleClick(offset)}
-                            /> */}
-                            {/* <ReactPaginate
-                                    previousLabel={'previous'}
-                                    nextLabel={'next'}
-                                    breakLabel={'...'}
-                                    breakClassName={'break-me'}
-                                    pageCount={totalRows}
-                                    marginPagesDisplayed={2}
-                                    pageRangeDisplayed={5}
-                                    onPageChange={handlePageClick}
-                                    containerClassName={'pagination'}
-                                    subContainerClassName={'pages pagination'}
-                                    activeClassName={'active'}
-                            /> */}
+                            onClick={(e, offset) => handleClick(offset+10)}
+                            />
                     </Grid>
                 </Grid>
              }
