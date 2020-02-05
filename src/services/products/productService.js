@@ -16,3 +16,14 @@ export const getAllProductsService = async (page) => {
         .catch(err => {throw err});
 
 }
+
+export const addToBasketService = async (id) => {
+  const token = AccessTokenStorage.get();
+  return await axios.post(`${BASE_URL_API}/api/products/addToBasket`,{idProduct: id},{
+    headers: {
+        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      }
+    })
+    .then(res => res)
+    .catch(err => {throw err});
+}

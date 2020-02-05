@@ -6,7 +6,6 @@ import { Grid, Container } from '@material-ui/core';
 import Pagination from "material-ui-flat-pagination";
 import Loading from '../../../components/commun/Loading';
 import { getAllProducts } from '../ressources/actions';
-import ReactPaginate from 'react-paginate';
 
 function ListProduct() {
     const [offset, setOffset] = useState(1);

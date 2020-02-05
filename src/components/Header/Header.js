@@ -25,6 +25,7 @@ export default function Header() {
 
     const classes = useStyles();
     const history = useHistory();
+    const products = useSelector(state => state.Product);
     const {authenticated} = useSelector(state => state.Login);
     return (
         <Fragment>
@@ -34,7 +35,7 @@ export default function Header() {
                                 <Typography variant="h6" className={classes.title}>
                                     E-Commerce
                                 </Typography>
-                                <MyMenu history={history} />
+                                <MyMenu history={history} products={products}/>
                                 </Toolbar>
                             </AppBar>
             }

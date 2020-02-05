@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-function MyMenu({history}) {
+function MyMenu({history,products}) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ function MyMenu({history}) {
                 </Button>
             </Link>
             <IconButton color="inherit">
-                <Badge badgeContent={0} color="secondary">
+                <Badge badgeContent={products.length} color="secondary">
                     <ShoppingCart />
                 </Badge>
             </IconButton>
