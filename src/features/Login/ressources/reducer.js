@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
         case LOGOUT_USER: 
             return {...state, isLoading: true}
         case LOGOUT_USER_SUCCESFULL:
-            return {...state, isLoading: false, authenticated: false}
+            return {...state, isLoading: false, authenticated: false, error: ''}
         case LOGOUT_USER_FAILED: 
             return {...state,isLoading: false, error: action.payload}
         case SET_USER_IN_STORE: 

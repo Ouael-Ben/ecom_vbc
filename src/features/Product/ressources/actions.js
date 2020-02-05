@@ -1,13 +1,14 @@
 import { GET_ALL_PRODUCTS, PUT_ALL_PRODUCTS } from "./action-type";
 
-export const getAllProducts = () => {
+export const getAllProducts = (page = 0) => {
     return {
-        type: GET_ALL_PRODUCTS
+        type: GET_ALL_PRODUCTS,
+        payload: page
     }
 }
 export const putAllProducts = (values) => {
     return {
         type: PUT_ALL_PRODUCTS,
-        payload : {...values}
+        payload : values
     }
 }

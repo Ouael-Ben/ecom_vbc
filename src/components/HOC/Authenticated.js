@@ -11,8 +11,7 @@ const authenticated = (WrappedComponent) => ({...props})=> {
     const dispatch = useDispatch();
 
     const isAuth = AuthUtils.isAuth();
-    console.log("####################")
-    console.log(isAuth);
+
     useEffect(()=> {
         if(!isAuth){
             history.push('/login');

@@ -6,14 +6,22 @@ import { Grid, Container } from '@material-ui/core';
 import Pagination from "material-ui-flat-pagination";
 import Loading from '../../../components/commun/Loading';
 import { getAllProducts } from '../ressources/actions';
+import ReactPaginate from 'react-paginate';
 
 function ListProduct() {
     const [offset, setOffset] = useState(0);
+    
     const dispatch = useDispatch();
-    const {isLoading, products} = useSelector(state => state.Product);
-    const handleClick = (offset) => {
-        setOffset(offset);
-    }
+    const {isLoading, products,totalRows} = useSelector(state => state.Product);
+    
+    const handlePageClick = data => {
+        console.log(data);
+        return;
+        let selected = data.selected;
+        const page = Math.ceil(selected * 10);
+        setOffset(page);
+        dispatch(getAllProducts(page))
+      };
     useEffect(() => {
         dispatch(getAllProducts());
     },[]);
@@ -21,37 +29,36 @@ function ListProduct() {
         <Container >
              {isLoading ? 
                          <Loading isLoading = {true} size ={30} color="blue"/> : <Grid container spacing={3}>
-                    {/* <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid> */}
+                    {
+                        products.map(product => {
+                            return (
+                                <Grid item xs={3}>
+                                    <Card key={product.id} product={product} />
+                                </Grid>
+                            );
+                        })
+                    
+                    }
                     <Grid item xs={12}>
-                        <Pagination
+                        {/* <Pagination
                             limit={10}
                             offset={offset}
-                            total={100}
+                            total={totalRows}
                             onClick={(e, offset) => handleClick(offset)}
-                            />
+                            /> */}
+                            {/* <ReactPaginate
+                                    previousLabel={'previous'}
+                                    nextLabel={'next'}
+                                    breakLabel={'...'}
+                                    breakClassName={'break-me'}
+                                    pageCount={totalRows}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    onPageChange={handlePageClick}
+                                    containerClassName={'pagination'}
+                                    subContainerClassName={'pages pagination'}
+                                    activeClassName={'active'}
+                            /> */}
                     </Grid>
                 </Grid>
              }

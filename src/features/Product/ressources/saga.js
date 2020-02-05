@@ -5,10 +5,12 @@ import { putAllProducts } from './actions';
 import { isNetworkError } from '../../../utils/catchNetworkError';
 
 
-function* getAllProductsWorker(){
+function* getAllProductsWorker(values){
     try{
-        const products = yield call(getAllProductsService);
-        //yield put(putAllProducts(products))
+        const page = values.payload;
+        const products = yield call(getAllProductsService,page);
+        console.log(products);
+        yield put(putAllProducts(products))
     }catch(e){
         if(isNetworkError(e)){
             
