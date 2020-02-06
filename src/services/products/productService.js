@@ -30,7 +30,7 @@ export const addToBasketService = async (id) => {
 
 export const getAllProductsBasket = async () => {
   const token = AccessTokenStorage.get();
-  return await axios.get(`${BASE_URL_API}/api/products/getProductsBasket`,{
+  return await axios.get(`${BASE_URL_API}/api/getCountProductsBasket`,{
     headers: {
       Authorization: 'Bearer ' + token //the token is a variable which holds the token
     }
