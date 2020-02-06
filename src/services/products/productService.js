@@ -4,7 +4,7 @@ import AccessTokenStorage from '../../utils/auth/AccessTokenStorage';
 
 export const getAllProductsService = async (page) => {
     const token = AccessTokenStorage.get();
-    return await axios.get(`${BASE_URL_API}/api/products?page=${page}`,{},{
+    return await axios.get(`${BASE_URL_API}/api/products?page=${page}`,{
         headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
           }
@@ -19,11 +19,21 @@ export const getAllProductsService = async (page) => {
 
 export const addToBasketService = async (id) => {
   const token = AccessTokenStorage.get();
-  return await axios.post(`${BASE_URL_API}/api/products/addToBasket`,{idProduct: id},{
+  return await axios.post(`${BASE_URL_API}/api/products/addCart`,{idProduct: id},{
     headers: {
         Authorization: 'Bearer ' + token //the token is a variable which holds the token
       }
     })
     .then(res => res)
     .catch(err => {throw err});
+}
+
+export const getAllProductsBasket = async () => {
+  const token = AccessTokenStorage.get();
+  return await axios.get(`${BASE_URL_API}/api/products/getProductsBasket`,{
+    headers: {
+      Authorization: 'Bearer ' + token //the token is a variable which holds the token
+    }
+  }).then(res => res.data)
+  .catch(err => {throw err});
 }

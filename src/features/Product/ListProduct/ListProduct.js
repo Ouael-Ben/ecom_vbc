@@ -5,7 +5,7 @@ import Card from '../../../components/Card/Card';
 import { Grid, Container } from '@material-ui/core';
 import Pagination from "material-ui-flat-pagination";
 import Loading from '../../../components/commun/Loading';
-import { getAllProducts } from '../ressources/actions';
+import { getAllProducts, addToBasket } from '../ressources/actions';
 
 function ListProduct() {
     const [offset, setOffset] = useState(1);
@@ -21,6 +21,11 @@ function ListProduct() {
     useEffect(() => {
         dispatch(getAllProducts());
     },[]);
+
+    const addProductToBasket = (id) => {
+        alert(id);
+        dispatch(addToBasket(id));
+    }
     return (
         <Container >
              {isLoading ? 
@@ -29,7 +34,7 @@ function ListProduct() {
                         products.map(product => {
                             return (
                                 <Grid item xs={3}>
-                                    <Card key={product.id} product={product} />
+                                    <Card key={product.id} product={product} onAddBasket = {() => {addProductToBasket(product.id)}}/>
                                 </Grid>
                             );
                         })

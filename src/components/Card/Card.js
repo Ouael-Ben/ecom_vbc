@@ -21,7 +21,7 @@ const useStyles = makeStyles({
       height: 200
     }
   });
-export default function MyCard({product}) {
+export default function MyCard({product,onAddBasket}) {
     const classes = useStyles();
 
     return (
@@ -42,7 +42,7 @@ export default function MyCard({product}) {
                 </CardContent>
             </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick = {onAddBasket}>
           Ajouter au panier
         </Button>
         <Box >

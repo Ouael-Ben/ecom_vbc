@@ -1,7 +1,7 @@
 import {call , put, takeLatest} from 'redux-saga/effects';
-import { GET_ALL_PRODUCTS, ADD_TO_BASKET } from './action-type';
-import { getAllProductsService, addToBasketService } from '../../../services/products/productService';
-import { putAllProducts, putToBasket } from './actions';
+import { GET_ALL_PRODUCTS, ADD_TO_BASKET, GET_ALL_BASKET } from './action-type';
+import { getAllProductsService, addToBasketService, getAllProductsBasket } from '../../../services/products/productService';
+import { putAllProducts, putToBasket, putAllProductBasket } from './actions';
 import { isNetworkError } from '../../../utils/catchNetworkError';
 
 
@@ -35,4 +35,18 @@ function* addToBasketWorker(values){
 
 export function * watchAddToBasket(){
     yield takeLatest(ADD_TO_BASKET,addToBasketWorker);
+}
+
+
+function * getAllProductBasket(){
+    try{
+        const products = yield call(getAllProductsBasket);
+        yield put(putAllProductBasket(products));
+    }catch(e){
+
+    }
+}
+
+export function * watchGetAllProductBasket(){
+    yield takeLatest(GET_ALL_BASKET,getAllProductBasket);
 }

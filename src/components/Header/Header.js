@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MyMenu from '../Menu/MyMenu';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { getAllBasket } from '../../features/Product/ressources/actions';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -25,8 +26,12 @@ export default function Header() {
 
     const classes = useStyles();
     const history = useHistory();
-    const products = useSelector(state => state.Product);
+    const dispatch = useDispatch();
+    const {countItemBasket} = useSelector(state => state.Product);
     const {authenticated} = useSelector(state => state.Login);
+    useEffect(() => {
+      dispatch(getAllBasket());
+    }, [])
     return (
         <Fragment>
             {
@@ -35,7 +40,7 @@ export default function Header() {
                                 <Typography variant="h6" className={classes.title}>
                                     E-Commerce
                                 </Typography>
-                                <MyMenu history={history} products={products}/>
+                                <MyMenu history={history} total={countItemBasket}/>
                                 </Toolbar>
                             </AppBar>
             }
