@@ -7,7 +7,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import withAuthenticated from '../../components/HOC/Authenticated';
 import {useSelector, useDispatch} from 'react-redux';
 import { getAllOrders } from './ressources/actions';
 
@@ -53,5 +52,5 @@ function HistoriqueOrders() {
         </Fragment>
     )
 }
-export default withAuthenticated(HistoriqueOrders)
+export default HistoriqueOrders
 

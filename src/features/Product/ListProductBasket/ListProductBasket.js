@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Paper, Card, CardContent, CardActions, Button, Typography, Container, Grid } from '@material-ui/core';
 import MaterialTable from 'material-table';
-import withAuthenticated from '../../../components/HOC/Authenticated';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBasket, removeProductBasket } from '../ressources/actions';
@@ -94,4 +93,4 @@ function ListProductBasket(props) {
     )
 }
 
-export default withAuthenticated(ListProductBasket)
+export default ListProductBasket

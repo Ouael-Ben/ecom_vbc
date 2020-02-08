@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect } from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, {  useEffect } from 'react'
+import { createStyles, makeStyles  } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -28,14 +28,12 @@ export default function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const {countItemBasket} = useSelector(state => state.Product);
-    const {authenticated} = useSelector(state => state.Login);
     useEffect(() => {
       dispatch(getAllBasket());
     }, [])
     return (
-        <Fragment>
-            {
-                    authenticated && <AppBar position="static" style={{marginBottom:10}}>
+       
+                     <AppBar position="static" style={{marginBottom:10}}>
                                 <Toolbar>
                                 <Typography variant="h6" className={classes.title}>
                                     E-Commerce
@@ -43,8 +41,7 @@ export default function Header() {
                                 <MyMenu history={history} total={countItemBasket}/>
                                 </Toolbar>
                             </AppBar>
-            }
-        </Fragment>
+           
         
     )
 }

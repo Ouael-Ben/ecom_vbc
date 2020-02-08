@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import withAuthenticated from '../../../components/HOC/Authenticated';
 import Card from '../../../components/Card/Card';
 import { Grid, Container } from '@material-ui/core';
 import Pagination from "material-ui-flat-pagination";
@@ -55,4 +54,4 @@ function ListProduct() {
     )
 }
 
-export default withAuthenticated(ListProduct);
+export default ListProduct;

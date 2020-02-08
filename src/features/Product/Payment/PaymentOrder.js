@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import withAuthenticated from '../../../components/HOC/Authenticated';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PaymentForm from '../../../components/PaymentForm/PaymentForm';
@@ -66,4 +65,4 @@ function PaymentOrder() {
         </Grid> 
     )
 }
-export default withAuthenticated(PaymentOrder)
+export default PaymentOrder
