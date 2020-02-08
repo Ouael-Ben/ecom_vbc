@@ -8,6 +8,7 @@ import store from '../../config/store';
 import ListProduct from '../Product/ListProduct/ListProduct';
 import ProductRoute from '../Product/routes';
 import Header from '../../components/Header/Header';
+import HistoriqueOrders from '../Order/HistoriqueOrders';
 
 export default function Layout() {
     
@@ -21,6 +22,7 @@ export default function Layout() {
                     <Route path= '/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
                     <Route path='/products' children={props => <ProductRoute {...props} />} />
+                    <Route path='/orders' exact component={HistoriqueOrders} />
 
                     {/* <Route path='/perimetre' children={props => <PerimetreRoute {...props} />} exact /> */}
 

@@ -1,18 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Paper, Card, CardContent, CardActions, Button, Typography, Container, Grid } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import withAuthenticated from '../../../components/HOC/Authenticated';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBasket } from '../ressources/actions';
+import { getAllBasket, removeProductBasket } from '../ressources/actions';
 import {sumBy} from 'lodash';
+import MyButton from '../../../components/commun/Button';
+import FormDialog from '../../../components/Dialog/FormDialog';
+import {useHistory} from 'react-router-dom';
 
-function ListProductBasket() {
-    const disptach = useDispatch();
+function ListProductBasket(props) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [openPaymenDialog, setOpenPaymenDialog] = useState(false);
+    const handleClickOpen = () => {
+        history.push('/products/order');
+    };
+    useEffect(() => {
+        
+        console.log(history);
+    }, [])
+    const handleClose = () => {
+        setOpenPaymenDialog(false);
+    };
+    const handleSubmit = () => {
+        setOpenPaymenDialog(false);
+    }
     const {itemsInBasket, isLoading} = useSelector(state => state.Product);
     useEffect(() => {
-        disptach(getAllBasket());
+        dispatch(getAllBasket());
     }, []);
+
+    const onRemoveProduct = (id) => {
+        dispatch(removeProductBasket(id));
+    }
     return (
         <Container >
                 <Grid>
@@ -44,7 +66,7 @@ function ListProductBasket() {
                                       icon: () => <DeleteOutline />,
                                       tooltip: 'Delete Item(s)',
                                       onClick: (e, rowData) => {
-                                        
+                                        onRemoveProduct(rowData.idLigneOrder);
                                       },
                                       
                                     },
@@ -56,22 +78,18 @@ function ListProductBasket() {
                             
                             </CardContent>
                             <CardActions style={{ justifyContent: "flex-end" }}>
-                                <Typography variant="title" style={{ marginRight: 10 }}>
+                                <Typography  style={{ marginRight: 10 }}>
                                 Total: ${sumBy(itemsInBasket,'price')}            
                                 </Typography>
-                                <Button
-                                variant="outlined"
-                                color="primary"
-                                style={{ textTransform: 'none' }}                        
-                                >
-                                Payment
-                                </Button>
+                                <MyButton nameButton="Payment" onClick={handleClickOpen} disabled={itemsInBasket.length === 0 ? true: false} /> 
                             </CardActions>
                         </Card>
 
                     </Grid>
                 </Grid>
-                
+                <FormDialog open={openPaymenDialog} 
+                            handleClose={handleClose} 
+                            handleSubmit={handleSubmit}/> 
         </Container>
     )
 }

@@ -36,16 +36,13 @@ export default function RegisterPage() {
         ...input,
         [e.currentTarget.name]: e.currentTarget.value
       })
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const user  = {
-            login : input.login,
-            password : input.password,
-            fullName: input.fullName,
-            confirmPassword: input.confirmPassword,
+    const handleSubmit = (user) => {
+        
+        const newUser  = {
+            ...user,
             history
         }
-        dispatch(registerUser(user));
+        dispatch(registerUser(newUser));
     }
     return (
         <Grid className={classes.root}

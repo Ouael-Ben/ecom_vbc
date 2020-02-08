@@ -25,7 +25,6 @@ function MyMenu({history,total}) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
-    console.log("aaaaaaaaaaaa",history)
     const handleLogout = (history) =>  {
         setOpen(true)
     }
@@ -49,16 +48,18 @@ function MyMenu({history,total}) {
                     Products
                 </Button>
             </Link>
-            <Link to='/products' className={classes.link}>
+            <Link to='/orders' className={classes.link}>
                 <Button color='inherit' className={classes.menuButton} >
                     Orders
                 </Button>
+            </Link>            
+            <Link to='/products/basket' className={classes.link}>
+                <IconButton color="inherit">
+                    <Badge badgeContent={total} color="secondary">
+                        <ShoppingCart />
+                    </Badge>
+                </IconButton>
             </Link>
-            <IconButton color="inherit">
-                <Badge badgeContent={total} color="secondary">
-                    <ShoppingCart />
-                </Badge>
-            </IconButton>
             <IconButton color="inherit" onClick={() => handleLogout(history)}>
                 <PowerSettingsNew />
             </IconButton>

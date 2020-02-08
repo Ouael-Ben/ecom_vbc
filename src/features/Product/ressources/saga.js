@@ -1,7 +1,7 @@
 import {call , put, takeLatest} from 'redux-saga/effects';
-import { GET_ALL_PRODUCTS, ADD_TO_BASKET, GET_ALL_BASKET } from './action-type';
-import { getAllProductsService, addToBasketService, getAllProductsBasket } from '../../../services/products/productService';
-import { putAllProducts, putToBasket, putAllProductBasket } from './actions';
+import { GET_ALL_PRODUCTS, ADD_TO_BASKET, GET_ALL_BASKET, REMOVE_PRODUCT_BASKET, PAYMENT_ORDER } from './action-type';
+import { getAllProductsService, addToBasketService, getAllProductsBasket, removeProductBasketService, paymentOrderService } from '../../../services/products/productService';
+import { putAllProducts, putToBasket, putAllProductBasket, getAllBasket } from './actions';
 import { isNetworkError } from '../../../utils/catchNetworkError';
 
 
@@ -49,4 +49,30 @@ function * getAllProductBasket(){
 
 export function * watchGetAllProductBasket(){
     yield takeLatest(GET_ALL_BASKET,getAllProductBasket);
+}
+
+
+function * removeProductBasketWorker(values){
+    try {
+        yield call(removeProductBasketService,values.payload);
+        yield put(getAllBasket());
+    }catch(e){
+
+    }
+}
+
+export function * watchRemoveProductBasket(){
+    yield takeLatest(REMOVE_PRODUCT_BASKET,removeProductBasketWorker);
+}
+
+function * paymentOrderWorker(values){
+    try {
+        yield call(paymentOrderService,values.payload);
+    }catch(e){
+
+    }
+}
+
+export function * watchPaymentOrder(){
+    yield takeLatest(PAYMENT_ORDER,paymentOrderWorker);
 }

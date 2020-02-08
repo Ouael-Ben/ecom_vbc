@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, PUT_ALL_PRODUCTS, ADD_TO_BASKET, PUT_TO_BASKET, GET_ALL_BASKET, PUT_ALL_BASKET } from "./action-type";
+import { GET_ALL_PRODUCTS, PUT_ALL_PRODUCTS, ADD_TO_BASKET, PUT_TO_BASKET, GET_ALL_BASKET, PUT_ALL_BASKET, REMOVE_PRODUCT_BASKET, PAYMENT_ORDER } from "./action-type";
 import {sumBy} from 'lodash';
 
 const INITIAL_STATE = {
@@ -26,6 +26,10 @@ export default (state = INITIAL_STATE, action) => {
         case PUT_ALL_BASKET:
             const countItem = sumBy(action.payload,'quantity');
             return {...state,countItemBasket: countItem, itemsInBasket: [...action.payload], isLoading: false}
+        case REMOVE_PRODUCT_BASKET:
+            return {...state,isLoading: true}
+        case PAYMENT_ORDER:
+            return {...state,isLoading: true}
         default:
             return state;
             

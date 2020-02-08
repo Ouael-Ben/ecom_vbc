@@ -16,8 +16,9 @@ const useStyles = makeStyles(theme => ({
         fontSize: 20
     }
 }))
-export default function MyButton({nameButton,isLoading,onClick}) {
+export default function MyButton(props) {
     const classes = useStyles();
+    const {nameButton,isLoading,onClick,disabled} = props
     return (
         <Fab
         variant="extended"
@@ -25,6 +26,7 @@ export default function MyButton({nameButton,isLoading,onClick}) {
         aria-label="add"
         className={classes.btn}
         onClick ={onClick}
+        disabled = {disabled}
         >
             {
               !isLoading ?  <>{nameButton}

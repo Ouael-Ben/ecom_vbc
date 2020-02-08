@@ -31,9 +31,9 @@ function ListProduct() {
              {isLoading ? 
                          <Loading isLoading = {true} size ={30} color="blue"/> : <Grid container spacing={3}>
                     {
-                        products.map(product => {
+                        products.map((product,index) => {
                             return (
-                                <Grid item xs={3}>
+                                <Grid item xs={3}key={index}>
                                     <Card key={product.id} product={product} onAddBasket = {() => {addProductToBasket(product.id)}}/>
                                 </Grid>
                             );

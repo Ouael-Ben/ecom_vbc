@@ -37,3 +37,38 @@ export const getAllProductsBasket = async () => {
   }).then(res => res.data)
   .catch(err => {throw err});
 }
+
+export const removeProductBasketService = async (id) => {
+  const token = AccessTokenStorage.get();
+  return await axios.post(`${BASE_URL_API}/api/removeLigneBasket`,{idLigneOrder: id},{
+    headers: {
+        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      }
+    })
+    .then(res => res)
+    .catch(err => {throw err});
+}
+
+export const paymentOrderService = async (payment) => {
+  const token = AccessTokenStorage.get();
+  return await axios.post(`${BASE_URL_API}/api/paymentOrder`,payment,{
+    headers: {
+        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      }
+    })
+    .then(res => res)
+    .catch(err => {throw err});
+}
+
+
+export const getAllOrdersService = async () => {
+  const token = AccessTokenStorage.get();
+  return await axios.get(`${BASE_URL_API}/api/getAllOrdersHistorique`,{
+      headers: {
+          Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+      })
+      .then(res => res.data )
+      .catch(err => {throw err});
+
+}
