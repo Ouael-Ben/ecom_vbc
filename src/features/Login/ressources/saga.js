@@ -4,15 +4,15 @@ import { LOGIN_USER, LOGOUT_USER} from './action-type';
 import { loginUserSuccefull, loginUserFailed, logoutUserFailed, logoutUserSuccesFull } from './actions';
 import {isNetworkError} from '../../../utils/catchNetworkError';
 import AccesTokenStorage from '../../../utils/auth/AccessTokenStorage';
-import { forwardTo } from '../../../utils/history';
+import customHistory from '../../../utils/history';
 
 function* AuthenticatingUser(values){
     try {
-        const {login,password, history} = values.payload
+        const {login,password} = values.payload
         const token = yield call(authenticateUser,{login,password});
         yield AccesTokenStorage.set(token.token);
         yield put(loginUserSuccefull());
-        yield call(forwardTo,history,'/'); 
+        yield customHistory.push("/");
     }catch(e){
         if(isNetworkError(e)){
             alert("Network error")
@@ -34,11 +34,10 @@ function * logoutUserSaga(values){
     try {
         console.log("saga");
         console.log(values);
-        const {history} = values.payload;
         yield call(logoutUserService);
         AccesTokenStorage.clear();
         yield put(logoutUserSuccesFull());
-        yield call(forwardTo,history,'/login'); 
+        yield customHistory.push("/login"); 
 
     }catch(e){
         console.log('leeeeeeee',e);

@@ -3,15 +3,17 @@ import {isNetworkError} from '../../../utils/catchNetworkError';
 import { registerUserSuccesfull, registerUserFailed } from "./actions";
 import { REGISTER_USER } from "./action-type";
 import { SignUpUserService } from "../../../services/auth/Auth";
-import { forwardTo } from '../../../utils/history';
+import customHistory from "../../../utils/history"
 
-function * RegisterUserSaga(values){
+function * RegisterUserSaga({payload}){
     try{
-        const {fullName, login, password, confirmPassword, history} = values.payload
-        yield call(SignUpUserService,{fullName,login,password,confirmPassword});
+        console.log(payload)
+        const {fullName, login, password, confirmPassword} = payload
+        customHistory.push("/login")
+       let response = yield call(SignUpUserService,{fullName,login,password,confirmPassword});
         yield put(registerUserSuccesfull());
-        yield call(forwardTo,history,'/login'); 
     }catch(e){
+        console.log(e)
         if(isNetworkError(e)){
             yield put(registerUserFailed("Error internal"));
         }

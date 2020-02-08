@@ -1,3 +1,3 @@
-export const  forwardTo = (history,to) => {
-    history.push(to);
-}
+import { createBrowserHistory } from "history";
+
+export default createBrowserHistory();

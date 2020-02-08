@@ -7,10 +7,11 @@ import ProductRoute from './features/Product/routes';
 import Header from './components/Header/Header';
 import HistoriqueOrders from './features/Order/HistoriqueOrders';
 import Auth from './components/Auth'
+import customHistory from "./utils/history"
 
 export default function Navigation() {
     return (
-        <Router>
+        <Router history={customHistory}>
         <Switch>
             <Route path='/register' exact component={Register} />
             <Route path= '/login' exact component={Login} />
