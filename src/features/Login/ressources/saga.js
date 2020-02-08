@@ -7,9 +7,8 @@ import AccesTokenStorage from '../../../utils/auth/AccessTokenStorage';
 import customHistory from '../../../utils/history';
 
 function* AuthenticatingUser(values){
-    try {
-        const {login,password} = values.payload
-        const token = yield call(authenticateUser,{login,password});
+    try { 
+        const token = yield call(authenticateUser,values.payload);
         yield AccesTokenStorage.set(token.token);
         yield put(loginUserSuccefull());
         yield customHistory.push("/");

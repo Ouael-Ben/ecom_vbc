@@ -33,18 +33,8 @@ export default function LoginPage() {
     useEffect(() => {
         if(AuthUtils.isAuth())
           history.push('/');
-      })
-    const handleInputChange = (e) => setInput({
-        ...input,
-        [e.currentTarget.name]: e.currentTarget.value
-      })
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const user  = {
-            login : input.login,
-            password : input.password,
-            history
-        }
+    })
+    const handleSubmit = (user) => {
         dispatch(loginUser(user));
     }
     return (
@@ -60,7 +50,6 @@ export default function LoginPage() {
                 <Paper elevation={3} className={classes.paper}>
                     <Logo />
                     <LoginForm isLoading = {isLoading} 
-                               OnInputChange = {handleInputChange}
                                OnSubmit = {handleSubmit}
                                error = {error}
                     />
