@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Paper,
   Card,
@@ -10,29 +12,19 @@ import {
 } from "@material-ui/core";
 import MaterialTable from "material-table";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
-import { useDispatch, useSelector } from "react-redux";
 import sumBy from "lodash/sumBy";
-import { useHistory } from "react-router-dom";
-import { getAllBasket, removeProductBasket } from "../ressources/actions";
 import MyButton from "../../../components/commun/Button";
-import FormDialog from "../../../components/Dialog/FormDialog";
+import { getAllBasket, removeProductBasket } from "../ressources/actions";
 
-function ListProductBasket(props) {
+function ListProductBasket() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [openPaymenDialog, setOpenPaymenDialog] = useState(false);
   const handleClickOpen = () => {
     history.push("/products/order", {
       page: "GO"
     });
   };
 
-  const handleClose = () => {
-    setOpenPaymenDialog(false);
-  };
-  const handleSubmit = () => {
-    setOpenPaymenDialog(false);
-  };
   const { itemsInBasket, isLoading } = useSelector(state => state.Product);
   useEffect(() => {
     dispatch(getAllBasket());
@@ -94,11 +86,6 @@ function ListProductBasket(props) {
           </Card>
         </Grid>
       </Grid>
-      <FormDialog
-        open={openPaymenDialog}
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-      />
     </Container>
   );
 }

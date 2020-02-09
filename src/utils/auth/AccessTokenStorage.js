@@ -1,4 +1,4 @@
-export const ACCESS_TOKEN_KEY = 'access_token';
+export const ACCESS_TOKEN_KEY = "access_token";
 
 const get = () => window.localStorage.getItem(ACCESS_TOKEN_KEY);
 const set = accessToken => {
@@ -11,5 +11,5 @@ const clear = () => {
 export default {
   get,
   set,
-  clear,
+  clear
 };

@@ -10,7 +10,6 @@ export default function RegisterForm({
   OnInputChange,
   OnSubmit
 }) {
-
   return (
     <Fragment>
       <Formik

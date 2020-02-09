@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import get from "lodash/get";
-import PaymentForm from "../../../components/PaymentForm/PaymentForm";
-import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentOrder } from "../ressources/actions";
 import { useHistory } from "react-router-dom";
-import { sumBy } from "lodash";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Paper, Typography } from "@material-ui/core";
+import CreditCardIcon from "@material-ui/icons/CreditCard";
+import sumBy from "lodash/sumBy";
+import get from "lodash/get";
+import { paymentOrder } from "../ressources/actions";
+import PaymentForm from "../../../components/PaymentForm/PaymentForm";
 const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1),

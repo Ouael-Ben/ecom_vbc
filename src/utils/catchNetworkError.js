@@ -1,3 +1,3 @@
-export const  isNetworkError = err => {
-    return !!err.isAxiosError && !err.response;
-}
+export const isNetworkError = err => {
+  return !!err.isAxiosError && !err.response;
+};
