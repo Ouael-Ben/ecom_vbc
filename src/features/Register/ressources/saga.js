@@ -9,14 +9,14 @@ function* RegisterUserSaga({ payload }) {
   try {
     console.log(payload);
     const { fullName, login, password, confirmPassword } = payload;
-    customHistory.push("/login");
-    let response = yield call(SignUpUserService, {
+    yield call(SignUpUserService, {
       fullName,
       login,
       password,
       confirmPassword
     });
     yield put(registerUserSuccesfull());
+    yield customHistory.push("/login");
   } catch (e) {
     console.log(e);
     if (isNetworkError(e)) {

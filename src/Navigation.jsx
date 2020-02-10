@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import Login from "./features/Login";
 import Register from "./features/Register";
 import ListProduct from "./features/Product/ListProduct/ListProduct";

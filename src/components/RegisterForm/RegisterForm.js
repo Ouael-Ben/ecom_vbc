@@ -22,12 +22,6 @@ export default function RegisterForm({
         validate={values => {
           const errors = {};
 
-          values.forEach(element => {
-            if (!element) {
-              errors[element] = "Required";
-            }
-          });
-
           if (values.confirmPassword !== values.password) {
             errors.confirmPassword = "Please check your password again";
           }

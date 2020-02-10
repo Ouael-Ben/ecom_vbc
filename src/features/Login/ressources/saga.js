@@ -4,13 +4,7 @@ import {
   logoutUserService
 } from "../../../services/auth/Auth";
 import { LOGIN_USER, LOGOUT_USER } from "./action-type";
-import {
-  loginUserSuccefull,
-  loginUserFailed,
-  logoutUserFailed,
-  logoutUserSuccesFull
-} from "./actions";
-import { isNetworkError } from "../../../utils/catchNetworkError";
+import { loginUserSuccefull, logoutUserSuccesFull } from "./actions";
 import AccesTokenStorage from "../../../utils/auth/AccessTokenStorage";
 import customHistory from "../../../utils/history";
 
@@ -20,20 +14,7 @@ function* AuthenticatingUser(values) {
     yield AccesTokenStorage.set(token.token);
     yield put(loginUserSuccefull());
     yield customHistory.push("/");
-  } catch (e) {
-    if (isNetworkError(e)) {
-      alert("Network error");
-      yield put(loginUserFailed("Error internal"));
-    } else {
-      if (e.response.status === 401)
-        yield put(
-          loginUserFailed(
-            "Le Login ou le mot de passe ne correspond à aucun compte."
-          )
-        );
-    }
-    console.log(e.isAxiosError);
-  }
+  } catch (e) {}
 }
 
 export function* watchAuthenticate() {
@@ -42,25 +23,11 @@ export function* watchAuthenticate() {
 
 function* logoutUserSaga(values) {
   try {
-    console.log("saga");
-    console.log(values);
     yield call(logoutUserService);
     AccesTokenStorage.clear();
     yield put(logoutUserSuccesFull());
     yield customHistory.push("/login");
-  } catch (e) {
-    console.log("leeeeeeee", e);
-    // if(isNetworkError(e)){
-    //     alert("Network error")
-    //     yield put(logoutUserFailed("Error internal"));
-    // }
-    // else {
-    //     if(e.response.status === 401){
-    //         yield put(logoutUserFailed("You canno't logout"));
-    //         alert("You canno't logout")
-    //     }
-    // }
-  }
+  } catch (e) {}
 }
 
 export function* watchLogout() {

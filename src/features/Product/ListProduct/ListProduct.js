@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Container } from "@material-ui/core";
 import Pagination from "material-ui-flat-pagination";
+import { getAllProducts, addToBasket } from "../ressources/actions";
 import Card from "../../../components/Card/Card";
 import Loading from "../../../components/commun/Loading";
-import { getAllProducts, addToBasket } from "../ressources/actions";
 
 export default () => {
   const [offset, setOffset] = useState(1);

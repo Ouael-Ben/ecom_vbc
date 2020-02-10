@@ -20,6 +20,7 @@ import {
   getAllBasket
 } from "./actions";
 import { isNetworkError } from "../../../utils/catchNetworkError";
+import customHistory from "../../../utils/history";
 
 function* getAllProductsWorker(values) {
   try {
@@ -73,6 +74,7 @@ export function* watchRemoveProductBasket() {
 function* paymentOrderWorker(values) {
   try {
     yield call(paymentOrderService, values.payload);
+    yield customHistory.push("/orders");
   } catch (e) {}
 }
 

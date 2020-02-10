@@ -1,15 +1,8 @@
-import axios from "axios";
-import { BASE_URL_API } from "../api/constants";
-import AccessTokenStorage from "../../utils/auth/AccessTokenStorage";
+import axios from "../../config/axios";
 
 export const getAllProductsService = async page => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .get(`${BASE_URL_API}/api/products?page=${page}`, {
-      headers: {
-        Authorization: "Bearer " + token //the token is a variable which holds the token
-      }
-    })
+    .get(`/products?page=${page}`)
     .then(res => {
       return {
         data: [...res.data.data],
@@ -23,17 +16,8 @@ export const getAllProductsService = async page => {
 };
 
 export const addToBasketService = async id => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .post(
-      `${BASE_URL_API}/api/products/addCart`,
-      { idProduct: id },
-      {
-        headers: {
-          Authorization: "Bearer " + token //the token is a variable which holds the token
-        }
-      }
-    )
+    .post(`/products/addCart`, { idProduct: id })
     .then(res => res)
     .catch(err => {
       throw err;
@@ -41,13 +25,8 @@ export const addToBasketService = async id => {
 };
 
 export const getAllProductsBasket = async () => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .get(`${BASE_URL_API}/api/getListProductsBasket`, {
-      headers: {
-        Authorization: "Bearer " + token //the token is a variable which holds the token
-      }
-    })
+    .get(`/getListProductsBasket`)
     .then(res => res.data)
     .catch(err => {
       throw err;
@@ -55,17 +34,8 @@ export const getAllProductsBasket = async () => {
 };
 
 export const removeProductBasketService = async id => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .post(
-      `${BASE_URL_API}/api/removeLigneBasket`,
-      { idLigneOrder: id },
-      {
-        headers: {
-          Authorization: "Bearer " + token //the token is a variable which holds the token
-        }
-      }
-    )
+    .post(`/removeLigneBasket`, { idLigneOrder: id })
     .then(res => res)
     .catch(err => {
       throw err;
@@ -73,13 +43,8 @@ export const removeProductBasketService = async id => {
 };
 
 export const paymentOrderService = async payment => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .post(`${BASE_URL_API}/api/paymentOrder`, payment, {
-      headers: {
-        Authorization: "Bearer " + token //the token is a variable which holds the token
-      }
-    })
+    .post(`/paymentOrder`, payment)
     .then(res => res)
     .catch(err => {
       throw err;
@@ -87,13 +52,8 @@ export const paymentOrderService = async payment => {
 };
 
 export const getAllOrdersService = async () => {
-  const token = AccessTokenStorage.get();
   return await axios
-    .get(`${BASE_URL_API}/api/getAllOrdersHistorique`, {
-      headers: {
-        Authorization: "Bearer " + token //the token is a variable which holds the token
-      }
-    })
+    .get(`/getAllOrdersHistorique`)
     .then(res => res.data)
     .catch(err => {
       throw err;
