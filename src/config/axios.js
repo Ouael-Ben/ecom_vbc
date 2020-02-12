@@ -23,7 +23,10 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response.status === 401) customHistory.push("/login");
+    if (error.response.status === 401) {
+      AccessTokenStorage.clear();
+      customHistory.push("/login");
+    }
     return Promise.reject(error);
   }
 );

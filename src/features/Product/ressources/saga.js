@@ -74,6 +74,7 @@ export function* watchRemoveProductBasket() {
 function* paymentOrderWorker(values) {
   try {
     yield call(paymentOrderService, values.payload);
+    yield put(getAllBasket());
     yield customHistory.push("/orders");
   } catch (e) {}
 }
