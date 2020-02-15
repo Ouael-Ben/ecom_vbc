@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid } from "@material-ui/core";
 import Logo from "../../components/Logo/Logo";
-import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import RegisterForm from "./components/RegisterForm";
 import { registerUser } from "./ressources/actions";
 import AuthUtils from "../../utils/auth/isAuth";
 

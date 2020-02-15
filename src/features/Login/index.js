@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Container, Grid } from "@material-ui/core";
-import LoginForm from "../../components/LoginForm/LoginForm";
+import LoginForm from "./components/LoginForm";
 import Logo from "../../components/Logo/Logo";
 import { loginUser } from "./ressources/actions";
 import AuthUtils from "../../utils/auth/isAuth";

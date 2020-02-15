@@ -7,7 +7,7 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import sumBy from "lodash/sumBy";
 import get from "lodash/get";
 import { paymentOrder } from "../ressources/actions";
-import PaymentForm from "../../../components/PaymentForm/PaymentForm";
+import PaymentForm from "./components/PaymentForm";
 const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1),
